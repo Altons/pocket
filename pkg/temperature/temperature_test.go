@@ -1,10 +1,15 @@
-package pocket
+package temperature_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/Altons/pocket/pkg/temperature"
+	"github.com/Altons/pocket/pkg/util"
+)
 
 func TestConvert(t *testing.T) {
 	for _, tc := range temperatureTestCases {
-		temp := temperature{}
+		temp := temperature.Temperature{}
 		got, err := temp.Convert(tc.value, tc.unitIn, tc.unitOut)
 		if tc.expectError {
 			// we expect error
@@ -18,7 +23,7 @@ func TestConvert(t *testing.T) {
 				t.Fatalf("Convert(%f, %q, %q) returned unexpected error: %v",
 					tc.value, tc.unitIn, tc.unitOut, err)
 			}
-			if round(got, 0.01) != round(tc.want, 0.01) {
+			if util.Round(got, 0.01) != util.Round(tc.want, 0.01) {
 				t.Fatalf("Convert(%f, %q,%q) = %f, want %f.",
 					tc.value, tc.unitIn, tc.unitOut, got, tc.want)
 			}

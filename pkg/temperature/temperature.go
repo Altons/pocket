@@ -1,22 +1,24 @@
-package pocket
+package temperature
 
 import (
 	"errors"
 	"strings"
+
+	"github.com/Altons/pocket/pkg/util"
 )
 
 //Temperature
-type temperature struct{}
+type Temperature struct{}
 
 //Convert is function converting different temperature units
 // It can convert Celsius(c), Kelvin(k) and Fahrenheit(f)
-func (t temperature) Convert(value float64, unitIn string, unitOut string) (float64, error) {
+func (t Temperature) Convert(value float64, unitIn string, unitOut string) (float64, error) {
 	units := []string{"c", "k", "f"}
-	unitI, err := find(units, strings.ToLower(unitIn))
+	unitI, err := util.Find(units, strings.ToLower(unitIn))
 	if err != nil {
 		return 0.0, errors.New("invalid unit:" + unitIn)
 	}
-	unitO, err := find(units, strings.ToLower(unitOut))
+	unitO, err := util.Find(units, strings.ToLower(unitOut))
 	if err != nil {
 		return 0.0, errors.New("invalid unit:" + unitOut)
 	}
