@@ -1,4 +1,4 @@
-package pocket
+package temperature_test
 
 var temperatureTestCases = []struct {
 	value       float64
